@@ -1,0 +1,7 @@
+﻿존 "안녕 세상아!" list(items -f long), Playsong("Intro song" -v 1)
+
+setScene("Classroom" -s 5.5)
+
+세상 " 너도 \"Quote Here\" 안녕~!"
+
+내레이션 "이렇게 해서 전통적인 '헬로 월드' 대화는 끝이 났습니다." Playsong(End, -p 0.5), list(players), saveGame(-1 -g all f simple)

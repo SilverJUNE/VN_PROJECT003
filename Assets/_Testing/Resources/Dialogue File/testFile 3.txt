@@ -1,0 +1,232 @@
+﻿
+내레이션 "게이트란, 수많은 평행세계와 연결된 문이다."
+내레이션 "다양한 시대의 영웅, 괴물, 신비가 가득한 가능성의 세계"
+내레이션 "그 가능성의 세계에서 "
+
+내레이션 "And so begin the adventures of <mainChar>"
+
+<mainChar> "my name is <mainChar>. {wc 5} What time is it?"
+
+내레이션 "The time is <time> and you are only level <playerLevel>"
+
+<mainChar> "Fuggedaboutit! <tempVal1>"
+
+
+
+CreateCharacter(하영 -enable true), CreateCharacter("Monk as Generic" -e true), Monk.SetSprite("Monk")
+
+Monk.SetPosition(1.4), Monk.Move(1)
+
+wait(1000)
+
+
+
+
+
+
+
+
+
+
+PlayAmbience(RainyMood), PlaySong(Calm), PlayVoice(wakeup), SetLayerMedia(background "01_1" -aud true -blend hurricane -i true)
+
+CreateCharacter(하영 -e true), CreateCharacter(크리스틴 -e true)
+하영.SetPosition( -x 0 -y 0 ),크리스틴.SetPosition( -x 1 -y 0)
+
+
+
+
+크리스틴 "It's a lodge! Let's go!"
+HideDB(-spd 0.1)
+
+하영.Move(1.5 0 -spd 2), 크리스틴.Move(1.5 0 - spd 2), 
+wait(2)
+하영.Hide(), 크리스틴.Hide()
+wait(0.75)
+ClearLayerMedia(background), wait(1)
+StopSong(), StopAmbience()
+wait(1)
+
+SetLayerMedia(background Classroom) 
+PlaySong(Calm2) 
+하영.Show(), 크리스틴.Show(), 하영.SetPosition(-x 0 -y 0), 크리스틴.SetPosition(-x 0.7 -y 0)
+wait(10)
+하영.Move(-x 0 -y 0 -spd 1.5), 크리스틴.Move(-x 1 -y 0 -spd 1.5)
+wait(1)
+
+ShowDB(-i true)
+크리스틴 "돔황쳐!!"
+[wait]HideUI(-spd 0.5)
+
+wait(1)
+
+[wait]ShowUI(-i true)
+
+"Done"
+
+
+
+
+
+
+
+
+
+
+
+
+
+wait(10000)
+
+SetLayerMedia(background "Fantasy Landscape" -aud true -spd 0.7 -blend hurricane -i true),
+CreateCharacter(하영 -e true -i true),
+하영.SetPosition(-x 0 -y 0)
+CreateCharacter(크리스틴 -e true -i true), 
+크리스틴.SetPosition(-x 1 -y 0)
+
+하영 "Nebula에 온 걸 환영해"
+
+SetLayerMedia(cinematic -m "~/Graphics/Gallery/flower")
+
+하영 "이..이게 뭐지? "
+
+ClearLayerMedia(cinematic -i true)
+
+크리스틴 "꽃이 보였어..."
+
+wait(10000)
+
+
+크리스틴.SetSprite(1 -l 0 -spd 0.75), 크리스틴.SetSprite(Raelin_8 -l 1 -spd 0.75)
+wait(1)
+
+[wait]MoveCharacter(하영 -x 1 -y -2.5 -spd 0.5)
+
+[wait]하영.Hide(), [wait]하영.Show()
+
+[wait]하영.Move(0 1 -sub 0.5)
+
+Hide(하영 Guard1 크리스틴 -spd 0.1)
+하영 "이제 우리는 사라져 볼게요."
+
+Show(하영 Guard1 크리스틴 -spd 0.1)
+
+하영 "함께 해줘서 고마워요! {c}나는 당심과 함께 몇가지 command를 쓰기를 바래요"
+
+MoveCharacter(Guard1 0 -spd 0.5), MoveCharacter(크리스틴 0.1 -spd 0.5), Hide(하영)
+
+Guard1 "어디 간거야??"
+
+크리스틴 "나도 모르지!"
+
+Guard1 "그녀를 놓친건가?"
+
+크리스틴 "나도 모른다고!!"
+
+wait(10000)
+
+크리스틴.SetPosition(1), 하영.SetPosition(0)
+
+Sort(하영 크리스틴 Guard1), 하영.SetColor(red), 크리스틴.SetColor(-c black), wait(1)
+
+
+하영.SetPriority(5), wait(1), 크리스틴.SetPriority(6)
+
+
+wait(1)
+
+[wait]Unhighlight(하영 크리스틴), wait(1), [wait]Highlight(하영 크리스틴), wait(1)
+
+Guard1.Show(-i true), wait(0.5)
+
+[wait]Highlight(하영 -o true), wait(1), [wait]Unhighlight(하영 -o true), wait(1)
+
+wait(5)
+
+[wait]하영.UnHighlight(),   [wait]크리스틴.UnHighlight()
+
+[wait]하영.Highlight(),		[wait]크리스틴.Highlight()
+
+wait(10)
+
+하영.Unhighlight(-i true), 크리스틴.Unhighlight(-i true)
+
+wait(5)
+
+하영.Highlight(-i true), 크리스틴.Highlight(-i true)
+
+SetLayerMedia(bg -l 0 -m abandonedHouse/pic1)
+
+SetBackground(image/video)
+
+SetCinematic(image/video -p)
+
+SetLayerImage
+SetLayerVideo
+
+
+SetLayerMedia(image/video layer)
+
+, SetLayerMedia(background -layer 1 SpaceshipInterior)
+
+
+
+
+
+
+PlayAmbience(RainyMood)
+PlaySong("Calm")
+PlayVoice(wakeup)
+SetLayerMedia(background "Fantasy Landscape" -aud true -spd 0.7 -blend hurricane -i true)
+
+CreateCharacter(하영 -x -1 -y 0 -e true -i true)
+
+
+CreateCharacter(크리스틴 -x 1 -y 0 -e true -i true)
+
+
+크리스틴 "It's a lodge! Let's go!"
+HideDB()
+
+하영.Move(1.5 -spd 2), 크리스틴.Move(1.5 - spd 2), 크리스틴.FaceRight(), 하영.Hide(), 크리스틴.Hide()
+wait(0.75)
+ClearLayerMedia(background), wait(1)
+StopSong(), 
+StopAmbience()
+wait(1)
+
+SetLayerMedia(background "Classroom"), PlaySong(Calm2)
+하영.Show(), 크리스틴.Show(), 하영.SetPosition(-0.5), 크리스틴.SetPosition(-0.5), 하영.FaceRight()
+하영.Move(0.3 -spd 1.5), 크리스틴.Move(0 -spd 1.5)
+wait(1)
+
+ShowDB()
+크리스틴 "돔황쳐!!"
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+wait(1000)
+
+
+enter 크리스틴 "하아암! 아침이구나!"
+
+"지금 몇 시지?"
+
+"뒤에 글은 잘 나오는 건가?"
+
+StopSong()
+StopAmbience()
+

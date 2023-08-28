@@ -1,0 +1,23 @@
+﻿
+print_1p("대화 파일에서 바로 실행되는 명령입니다!")
+
+주인공 as 내레이션 "왼쪽으로 피한 다음에 오른쪽으로 피해!" print_1p("Start Moving"), [wait]moveCharDemo(left), [wait]moveCharDemo(right), print_1p("Done Moving")
+
+내레이션 "그렇게 나의 말에 따라, 하영은 몸을 왼쪽으로 피했다 오른쪽으로 피했고"
+"마치 짠 것처럼, 오른쪽과 왼쪽 양옆으로"
+"거대한 돌덩이가 그녀의 옆으로 스쳐 지나갔다."
+
+하영 "(주..죽을뻔 했다.)"
+
+
+
+
+
+
+존 "일단 음악을 틀자!" playSong("Funky Beets" -v 0.75 -p 1), setMood(chill)
+
+엘렌 "음악 취향이 독특하네요."playVoice("e_d1_v2" -v 1.5), setBackground(Room1 -t "Diagonal Lines" -s 3.5)
+
+setAccomplishment("A Legendary Boombox" true), setCLI(Elen 0:Angle1 1:Intrigued -s 2.3 -l true)
+
+showScene(false),StopMusic(all -s 1.5)

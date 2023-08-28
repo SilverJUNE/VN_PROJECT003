@@ -1,0 +1,31 @@
+﻿
+wait(1), CreateCharacter(하영 -e true), CreateCharacter(크리스틴), CreateCharacter("Guard1 as Generic" -e true -i true)
+
+MoveCharacter(하영 -x 0 -y -2.5 0.75)
+
+
+wait(1000)
+
+MoveCharacter(하영 0 0.75, -sm false -i true)
+
+Move(하영 0 1.2 false)
+
+Show(하영 크리스틴 Guard1 -immediate false)
+
+나래이터 "이제 캐릭터가 나타납니다."
+
+enter 하영 as ??? [2.웃는 표정] "이것은 Sprite 메뉴얼로 enter 하영 as ??? [2.웃는 표정] 입니다."
+
+하영 at 1 "이건 실험입니다."
+
+enter 크리스틴 as ??? [0:1, 1:Raelin_7] "이것은 SpriteSheet 메뉴얼로 enter 크리스틴 as ??? [0:1, 1:Raelin_7] 입니다."
+
+크리스틴 at 0 "이것도 실험 입니다."
+
+
+enter 하영 "안녕 크리스틴!"
+크리스틴 "안녕.{wa 0.5} 정말 좋은 날이야."
+
+
+
+
