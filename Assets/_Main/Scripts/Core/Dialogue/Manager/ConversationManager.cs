@@ -12,10 +12,9 @@ namespace DIALOGUE
     /// </summary>
     public class ConversationManager
     {
-
         private DialogueSystem dialogueSystem => DialogueSystem.instance;
 
-        private Coroutine   process = null;
+        private Coroutine process = null;
 
         public bool isRunning => process != null;
 
@@ -24,6 +23,12 @@ namespace DIALOGUE
 
         private TagManager tagManager;
         private LogicalLineManager logicalLineManager;
+
+        public Conversation conversation => (conversationQueue.IsEmpty() ? null : conversationQueue.top);
+
+        public int conversationProgress => (conversationQueue.IsEmpty() ? -1 : conversationQueue.top.GetProgress());
+        
+        private ConversationQueue conversationQueue;
 
         /// <summary>
         /// ConversationManager 클래스의 생성자입니다. TextArchitect 인스턴스를 인수로 받습니다.
@@ -35,7 +40,12 @@ namespace DIALOGUE
 
             tagManager = new TagManager();
             logicalLineManager = new LogicalLineManager();
+
+            conversationQueue = new ConversationQueue();
         }
+
+        public void Enqueue(Conversation conversation) => conversationQueue.Enqueue(conversation);
+        public void EnqueuePriority(Conversation conversation) => conversationQueue.EnqueuePriority(conversation);
 
         /// <summary>
         /// 사용자가 다음 버튼을 눌렀을 때 호출되는 메서드입니다.
@@ -48,11 +58,13 @@ namespace DIALOGUE
         /// <summary>
         /// 대화를 시작하는 메서드입니다. 대화 내용의 목록을 인수로 받습니다.
         /// </summary>
-        public Coroutine StartConversation(List<string> conversation)
+        public Coroutine StartConversation(Conversation conversation)
         {
             StopConversation();
 
-            process = dialogueSystem.StartCoroutine(RunningConversation(conversation));
+            Enqueue(conversation);
+
+            process = dialogueSystem.StartCoroutine(RunningConversation());
 
             return process;
         }
@@ -64,6 +76,7 @@ namespace DIALOGUE
         {
             if (!isRunning)
                 return;
+
             dialogueSystem.StopCoroutine(process);
             process = null;
         }
@@ -71,17 +84,30 @@ namespace DIALOGUE
         /// <summary>
         /// 대화를 실행하는 코루틴입니다. 대화 내용을 담은 문자열 목록을 인수로 받습니다.
         /// </summary>
-        IEnumerator RunningConversation(List<string> conversation)
+        IEnumerator RunningConversation()
         {
             // 대화 목록의 각 요소에 대해
-            for (int i = 0; i < conversation.Count; i++)
-            {
-                // 공백이거나 내용이 없는 라인은 건너뜁니다.
-                if (string.IsNullOrWhiteSpace(conversation[i]))
+            while (!conversationQueue.IsEmpty())
+            { 
+                Conversation currentConversation = conversation;
+
+                if(currentConversation.HasReachedEnd())
+                {
+                    conversationQueue.Dequeue();
                     continue;
+                }
+
+                string rawLine = currentConversation.CurrentLine();
+
+                // 공백이거나 내용이 없는 라인은 건너뜁니다.
+                if (string.IsNullOrWhiteSpace(rawLine))
+                {
+                    TryAdvanceConversation(currentConversation);
+                    continue;
+                }
 
                 // 각 대화 라인을 파싱하여 DIALOGUE_LINE 객체를 생성합니다.
-                DIALOGUE_LINE line = DialogueParser.Parse(conversation[i]);
+                DIALOGUE_LINE line = DialogueParser.Parse(rawLine);
 
                 if(logicalLineManager.TryGetLogic(line, out Coroutine logic))
                 {
@@ -105,7 +131,22 @@ namespace DIALOGUE
                         CommandManager.instance.StopAllProcesses();
                     }
                 }
+
+                TryAdvanceConversation(currentConversation);
             }
+
+            process = null;
+        }
+
+        private void TryAdvanceConversation(Conversation conversation)
+        {
+            conversation.IncrementProgress();
+
+            if (conversation != conversationQueue.top)
+                return;
+
+            if (conversation.HasReachedEnd())
+                conversationQueue.Dequeue();
         }
 
         /// <summary>

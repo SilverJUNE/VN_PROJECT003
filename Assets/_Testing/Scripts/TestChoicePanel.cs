@@ -6,9 +6,11 @@ namespace Testing
 {
     public class TestChoicePanel : MonoBehaviour
     {
-        ChoicePanel panel;
-        // Start is called before the first frame update
 
+        [SerializeField] private TextAsset fileToRead = null;
+        ChoicePanel panel;
+
+        // Start is called before the first frame update
         void Start()
         {
             panel = ChoicePanel.instance;
@@ -34,6 +36,11 @@ namespace Testing
 
             Debug.Log($"Made choice {decision.answerIndex} '{decision.choices[decision.answerIndex]}'");
 
+        }
+
+        private void StartChoiceSelection_1()
+        {
+            List<string> lines = FileManager.ReadTextAsset(fileToRead);
         }
     }
 }

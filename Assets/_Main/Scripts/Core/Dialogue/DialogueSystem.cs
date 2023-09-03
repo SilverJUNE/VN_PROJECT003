@@ -12,11 +12,10 @@ namespace DIALOGUE
     public class DialogueSystem : MonoBehaviour
     {
         [SerializeField] private DialogueSystemConfigurationSO _config;
-
         public  DialogueSystemConfigurationSO config => _config;
 
-        public  DialogueContainer   dialogueContainer   = new DialogueContainer();
-        private ConversationManager conversationManager;
+        public  DialogueContainer dialogueContainer   = new DialogueContainer();
+        public ConversationManager conversationManager { get; private set; }
         private TextArchitect architect;
         private AutoReader autoReader;
 
@@ -162,7 +161,13 @@ namespace DIALOGUE
         /// 대화 내용을 리스트로 받아 대화를 생성하고 표시하는 메서드입니다.
         /// </summary>
         /// <param name="conversation">대화 내용을 포함하는 문자열 리스트입니다.</param>
-        public Coroutine Say(List<string> conversation)
+        public Coroutine Say(List<string> lines)
+        {
+            Conversation conversation = new Conversation(lines);
+            return conversationManager.StartConversation(conversation);
+        }
+
+        public Coroutine Say(Conversation conversation)
         {
             return conversationManager.StartConversation(conversation);
         }
