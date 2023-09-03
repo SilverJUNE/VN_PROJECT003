@@ -3,12 +3,13 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
+using DIALOGUE;
 
 public class ChoicePanel : MonoBehaviour
 {
     public static ChoicePanel instance { get; private set; }
 
-    private const float BUTTON_MIN_WIDTH = 500f;
+    private const float BUTTON_MIN_WIDTH = 800f;
     private const float BUTTON_MAX_WIDTH = 1000f;
     private const float BUTTON_WIDTH_PADDING = 100f;
 
@@ -49,6 +50,7 @@ public class ChoicePanel : MonoBehaviour
 
         cg.Show();
         cg.SetInteractableState(active: true);
+        DialogueSystem.instance.dialogueContainer.Hide();
 
         titleText.text = question;
         StartCoroutine(GenerateChoice(choices));
@@ -114,6 +116,7 @@ public class ChoicePanel : MonoBehaviour
     {
         cg.Hide();
         cg.SetInteractableState(false);
+        DialogueSystem.instance.dialogueContainer.Show();
     }
 
     private void AcceptAnswer(int index)

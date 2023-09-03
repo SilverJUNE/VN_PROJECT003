@@ -22,6 +22,8 @@ namespace COMMANDS
             //Dialogue Box Controls
             database.AddCommand("showdb", new Func<string[], IEnumerator>(ShowDialogueBox));
             database.AddCommand("hidedb", new Func<string[], IEnumerator>(HideDialogueBox));
+
+            //database.AddCommand()
         }
 
         private static IEnumerator Wait(string data)
