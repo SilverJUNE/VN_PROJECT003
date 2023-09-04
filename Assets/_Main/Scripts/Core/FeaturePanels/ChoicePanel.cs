@@ -13,7 +13,7 @@ public class ChoicePanel : MonoBehaviour
     private const float BUTTON_MAX_WIDTH = 1000f;
     private const float BUTTON_WIDTH_PADDING = 100f;
 
-    private const float BUTTON_HEIGHT_PER_LINE = 50f;
+    private const float BUTTON_HEIGHT_PER_LINE = 110f;
     private const float BUTTON_HEIGHT_PADDING = 20f;
 
     [SerializeField] private CanvasGroup canvasGroup;

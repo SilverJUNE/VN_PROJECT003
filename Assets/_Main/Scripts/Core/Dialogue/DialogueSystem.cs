@@ -172,11 +172,23 @@ namespace DIALOGUE
             return conversationManager.StartConversation(conversation);
         }
 
+        
+
         public bool isVisible => cgController.isVisible;
 
         public Coroutine Show(float speed = 1f, bool immediate = false) => cgController.Show(speed, immediate);
 
         public Coroutine Hide(float speed = 1f, bool immediate = false) => cgController.Hide(speed, immediate);
 
+        public void OnDialogueButtonClicked()
+        {
+            DialogueSystem.instance.dialogueContainer.ShowDialogueBox();
+        }
+
+        public void OnCloseButtonClicked()
+        {
+            // DialogueContainer의 HideDialogueBox가 구현되었다고 가정
+            dialogueContainer.HideDialogueBox();
+        }
     }
 }

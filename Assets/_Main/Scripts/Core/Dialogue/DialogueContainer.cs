@@ -1,6 +1,7 @@
 using UnityEngine;
 using TMPro;
 using System.Collections;
+using System;
 
 namespace DIALOGUE
 {
@@ -55,6 +56,30 @@ namespace DIALOGUE
         public bool isVisible => cgController.isVisible;
         public Coroutine Show(float speed = 1f, bool immediate = false) => cgController.Show(speed, immediate);
         public Coroutine Hide(float speed = 1f, bool immediate = false) => cgController.Hide(speed, immediate   );
+
+        internal void HideDialogueBox()
+        {
+            throw new NotImplementedException();
+        }
+
+        internal void ShowDialogueBox()
+        {
+            throw new NotImplementedException();
+        }
+
+        public void ShowDialogueBox(float speed = 1f, bool immediate = false)
+        {
+            // Assuming cgController handles the visibility of the dialogue box
+            cgController.Show(speed, immediate);
+        }
+
+        public void HideDialogueBox(float speed = 1f, bool immediate = false)
+        {
+            // Assuming cgController handles the visibility of the dialogue box
+            cgController.Hide(speed, immediate);
+        }
+
+
     }
 }
 

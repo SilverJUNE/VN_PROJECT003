@@ -10,6 +10,9 @@ namespace COMMANDS
     {
         private static readonly string[] PARAM_IMMEDIATE = new string[] { "-i", "-immediate" };
         private static readonly string[] PARAM_SPEED     = new string[] { "-spd", "-speed" };
+        private static readonly string[] PARAM_FILEPATH = new string[] { "-f", "-file", "-filepath" };
+        private static readonly string[] PARAM_ENQUEUE = new string[] { "-e", "-enqueue" };
+
 
         new public static void Extend(CommandDatabase database)
         {
@@ -23,7 +26,21 @@ namespace COMMANDS
             database.AddCommand("showdb", new Func<string[], IEnumerator>(ShowDialogueBox));
             database.AddCommand("hidedb", new Func<string[], IEnumerator>(HideDialogueBox));
 
-            //database.AddCommand()
+            database.AddCommand("load", new Action<string[]>(LoadNewDialogueFile));
+        }
+
+        private static void LoadNewDialogueFile(string[] data)
+        {
+            string fileName = string.Empty;
+            bool enqueue = false;
+
+            var parameters = ConvertDataToParameters(data);
+
+            parameters.TryGetValue(PARAM_FILEPATH, out fileName);
+            parameters.TryGetValue(PARAM_ENQUEUE, out enqueue, defaultValue: false);
+
+            string filePath = FilePaths.GetPathToResource(FilePaths.resources_dialogueFiles, fileName);
+            TextAsset file = Resources.Load<TextAsset>(filePath);
         }
 
         private static IEnumerator Wait(string data)
