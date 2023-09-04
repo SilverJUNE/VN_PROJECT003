@@ -1,3 +1,4 @@
+using Newtonsoft.Json.Bson;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -29,5 +30,6 @@ namespace DIALOGUE
 
         public bool IsEmpty() => conversationQueue.Count == 0;
 
+        public void Clear() => conversationQueue.Clear();
     }
 }

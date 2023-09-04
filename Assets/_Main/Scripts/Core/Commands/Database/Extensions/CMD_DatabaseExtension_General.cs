@@ -41,6 +41,20 @@ namespace COMMANDS
 
             string filePath = FilePaths.GetPathToResource(FilePaths.resources_dialogueFiles, fileName);
             TextAsset file = Resources.Load<TextAsset>(filePath);
+
+            if(file == null)
+            {
+                Debug.LogWarning($"File '{filePath}' could not be loaded from dialogue files. Please ensure it exists with in the '{FilePaths.resources_dialogueFiles}' resources folder.");
+                return;
+            }
+
+            List<string> lines = FileManager.ReadTextAsset(file, includeBlackLines: true);
+            Conversation newConversation = new Conversation(lines);
+
+            if (enqueue)
+                DialogueSystem.instance.conversationManager.Enqueue(newConversation);
+            else
+                DialogueSystem.instance.conversationManager.StartConversation(newConversation);
         }
 
         private static IEnumerator Wait(string data)
