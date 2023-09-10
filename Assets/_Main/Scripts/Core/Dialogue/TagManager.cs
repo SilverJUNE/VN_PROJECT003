@@ -2,26 +2,20 @@ using System.Collections.Generic;
 using System.Text.RegularExpressions;
 using System;
 
-public class TagManager 
+public class TagManager
 {
-    private readonly Dictionary<string, Func<String>> tags = new Dictionary<string, Func<string>>();
-    private readonly Regex tagRegex = new Regex("<\\w+>");
-
-    public TagManager()
+    private static readonly Dictionary<string, Func<String>> tags = new Dictionary<string, Func<string>>()
     {
-        InitializeTags();
-    }
+        {"<mainChar>",      () => "" },
+        { "<time>",         () => DateTime.Now.ToString("tt hh:mm") },
+        { "<playerLevel>",  () => "15" },
+        { "<input>",        () => InputPanel.instance.lastInput },
+        { "<tempVal1>",     () => "42" }
 
-    private void InitializeTags()
-    {
-        tags["<mainChar>"] = () => "Avira";
-        tags["<time>"] = () => DateTime.Now.ToString("tt hh:mm");
-        tags["<playerLevel>"] = () => "15";
-        tags["<input>"] = () => InputPanel.instance.lastInput;
-        tags["<tempVal1>"] = () => "42";
-    }
+    };
+    private static readonly Regex tagRegex = new Regex("<\\w+>");
 
-    public string Inject(string text)
+    public static string Inject(string text)
     {
         if(tagRegex.IsMatch(text))
         {
